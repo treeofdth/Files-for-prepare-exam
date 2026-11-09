@@ -45,6 +45,11 @@ namespace LR4__2.Views
                 }
             }
 
+            if (CurrentUser.isLoggedIn)
+            {
+                tbCurrentUser.Text = $"User: {CurrentUser.User.Login}";
+            }
+
             _allProd = products;
             lviewBrands.ItemsSource = products;
 
@@ -174,6 +179,18 @@ namespace LR4__2.Views
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             ShowPage(_currentPage + 1);
+        }
+
+        //detail btn
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var product = button?.Tag as Product;
+
+            if (product != null)
+            {
+                NavigationService?.Navigate(new BrandDetails(product));
+            }
         }
     }
 }
